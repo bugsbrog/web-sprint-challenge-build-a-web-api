@@ -35,7 +35,8 @@ router.put('/:id', validateActionId, validateActionBody, async (req, res, next) 
     const { id } = req.params
     const { project_id, description, notes, completed } = req.body
         try {
-
+            const updateAction = await Actions.update(id, { project_id, description, notes, completed })
+            res.json(updateAction)
         } catch (err) {
             next(err)
         }
