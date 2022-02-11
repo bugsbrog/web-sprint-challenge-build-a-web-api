@@ -17,13 +17,8 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', validateActionId, async (req, res, next) => {
-    const { id } = req.params
-        try {
-
-        } catch (err) {
-            next(err)
-        }
+router.get('/:id', validateActionId, async (req, res, next) => { // eslint-disable-line
+    res.json(req.action)
 })
 
 router.post('/', validateAction, async (req, res, next) => {
