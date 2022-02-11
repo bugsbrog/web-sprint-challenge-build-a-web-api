@@ -1,5 +1,8 @@
 const express = require('express')
 
+const Projects = require('./projects-model')
+const Actions = require('../actions/actions-model')
+
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
