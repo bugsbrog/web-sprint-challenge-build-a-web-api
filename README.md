@@ -147,7 +147,51 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers beforehand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+
+NODE.JS
+Node.js uses the same program language for client & server
+JavaScript is asynchronous & single-threaded
+Using JavaScript gives us access to the npm repository
+
+EXPRESS benefits
+Simple
+Unopinionated
+Extensible
+Light-weight
+Compatible w/connect middleware
+Packaged into clean, intuitive and easy-to-use API
+
+EXPRESS Features
+Middleware
+Routing
+Routers
+Convenience Helpers
+Views
+
+2. Understand and explain the use of Middleware.
+
+MIDDLEWARE
+
+Middleware functions can get the request and response objects, operate on them, and (when specified) trigger some action. It helps make our code D.R.Y (Don't Repeat Yourself).
+
+3. The basic principles of the REST architectural style.
+
+REST principles
+EVERYTHING is a resource
+Each resource is accessible by a unique URL
+Resources can have multiple representations
+Communication happens over HTTP (a stateless protocol)
+Resource management happens by HTTP methods
+
+4. Understand and explain the use of Express Routers.
+
+Express Routers
+It behaves like a mini Express application 
+It can have its own routing and middleware.
+Helps us to be able to use routes to write requests: "const router = express.Router()"
+
+6. Describe tooling used to manually test the correctness of an API.
+
+TOOLS
+You can use HTTPie (in terminal) to test if an API works
+You can also use PostMan (app/website) to test if an API works the way you want
