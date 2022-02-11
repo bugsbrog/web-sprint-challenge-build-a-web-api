@@ -18,8 +18,8 @@ async function validateProjectId(req, res, next) {
         }
 }
 
-async function validateProjectBody (req, res, next) {
-    const {name, description, completed} = req.body
+function validateProjectBody(req, res, next) {
+    const { name, description, completed } = req.body
 
     if (!name || !description || completed === undefined) {
         next({

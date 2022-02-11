@@ -1,6 +1,7 @@
 const express = require('express')
 const {
-    validateProjectId, validateProjectBody
+    validateProjectId,
+    validateProjectBody
 } = require('./projects-middleware')
 const Projects = require('./projects-model')
 const Actions = require('../actions/actions-model')
@@ -16,14 +17,14 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', validateProjectId, async (req, res, next) => {
+router.get('/:id', validateProjectId, async (req, res, next) => { // eslint-disable-line
     res.json(req.project)
 })
 
 router.post('/', validateProjectBody, async (req, res, next) => {
-    const { name, description } = req.body
+    const { name, description, completed } = req.body
+    const createProj = await Projects.insert({ name, description, completed })
         try {
-            const createProj = await Projects.insert({ name, description })
             res.status(201).json(createProj)
         } catch (err) {
             next(err)
@@ -53,8 +54,9 @@ router.delete('/:id', validateProjectId, async (req, res, next) => {
 
 router.get('/:id/actions', validateProjectId, async (req, res, next) => {
     const { id } = req.params
+    const action = await Projects.getProjectActions(id)
         try {
-
+            res.json(action)
         } catch (err) {
             next(err)
         }
