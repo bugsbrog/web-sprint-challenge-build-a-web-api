@@ -7,7 +7,8 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     try {
-
+        const getProj = await Projects.get()
+        res.json(getProj)
     } catch (err) {
         next(err)
     }

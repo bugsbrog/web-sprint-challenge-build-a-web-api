@@ -9,7 +9,7 @@ server.use('/api/actions', actionsRouter)
 server.use('/api/projects', projectsRouter)
 
 server.use('*', (req, res) => {
-    res.send(`<h1>Hello there! Nice to meet you! 😁</h1>`)
+    res.send(`<h1>Hello there! 😁</h1>`)
 })
 
 server.use((err, req, res, next) => { // eslint-disable-line
