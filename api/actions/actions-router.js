@@ -1,12 +1,17 @@
 const express = require('express')
-
+const {
+    validateActionId,
+    validateAction,
+    validateActionBody
+} = require('./actions-middlware')
 const Actions = require('./actions-model')
 
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     try {
-
+        const getAction = await Actions.get()
+        res.json(getAction)
     } catch (err) {
         next(err)
     }
