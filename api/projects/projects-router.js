@@ -23,8 +23,8 @@ router.get('/:id', validateProjectId, async (req, res, next) => { // eslint-disa
 
 router.post('/', validateProjectBody, async (req, res, next) => {
     const { name, description, completed } = req.body
-    const createProj = await Projects.insert({ name, description, completed })
         try {
+            const createProj = await Projects.insert({ name, description, completed })
             res.status(201).json(createProj)
         } catch (err) {
             next(err)

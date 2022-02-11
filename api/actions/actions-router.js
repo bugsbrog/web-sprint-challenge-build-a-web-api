@@ -22,15 +22,18 @@ router.get('/:id', validateActionId, async (req, res, next) => { // eslint-disab
 })
 
 router.post('/', validateAction, async (req, res, next) => {
-    try {
-
-    } catch (err) {
-        next(err)
-    }
+    const { project_id, description, notes } = req.body
+        try {
+            const createAction = await Actions.insert({ project_id, description, notes })
+            res.status(201).json(createAction)
+        } catch (err) {
+            next(err)
+        }
 })
 
 router.put('/:id', validateActionId, validateActionBody, async (req, res, next) => {
     const { id } = req.params
+    const { project_id, description, notes, completed } = req.body
         try {
 
         } catch (err) {
