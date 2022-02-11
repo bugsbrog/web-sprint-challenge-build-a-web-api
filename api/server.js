@@ -13,11 +13,11 @@ server.use('*', (req, res) => {
 })
 
 server.use((err, req, res, next) => { // eslint-disable-line
-    console.log('You TOTALLY messed up!')
-    res.status(500).json({
-        message: err.message,
-        stack: err.stack
+    console.log('You done messed up!')
+    res.status(err.status || 500).json({
+        message: `WORRY: ${err.message}`
     })
 })
+
 
 module.exports = server;

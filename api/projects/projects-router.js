@@ -1,13 +1,13 @@
 const express = require('express')
 const {
-    logger
+    validateProjectId, validateProjectBody
 } = require('./projects-middleware')
 const Projects = require('./projects-model')
 const Actions = require('../actions/actions-model')
 
 const router = express.Router()
 
-router.get('/', logger, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const getProj = await Projects.get()
         res.json(getProj)
@@ -16,17 +16,11 @@ router.get('/', logger, async (req, res, next) => {
     }
 })
 
-router.get('/:id', logger, async (req, res, next) => {
-    const { id } = req.params
-        try {
-            const projId = await Projects.get(id)
-            res.json(projId)
-        } catch (err) {
-            next(err)
-        }
+router.get('/:id', validateProjectId, async (req, res, next) => {
+    res.json(req.project)
 })
 
-router.post('/', logger, async (req, res, next) => {
+router.post('/', validateProjectBody, async (req, res, next) => {
     const { name, description } = req.body
         try {
             const createProj = await Projects.insert({ name, description })
@@ -36,7 +30,7 @@ router.post('/', logger, async (req, res, next) => {
         }
 })
 
-router.put('/:id', logger, async (req, res, next) => {
+router.put('/:id', validateProjectId, validateProjectBody, async (req, res, next) => {
     const { id } = req.params
     const { name, description, completed } = req.body
         try {
@@ -47,16 +41,17 @@ router.put('/:id', logger, async (req, res, next) => {
         }
 })
 
-router.delete('/:id', logger, async (req, res, next) => {
+router.delete('/:id', validateProjectId, async (req, res, next) => {
     const { id } = req.params
+    const deleteProj = await Projects.remove(id)
         try {
-
+            res.json(deleteProj)
         } catch (err) {
             next(err)
         }
 })
 
-router.get('/:id/actions', logger, async (req, res, next) => {
+router.get('/:id/actions', validateProjectId, async (req, res, next) => {
     const { id } = req.params
         try {
 
