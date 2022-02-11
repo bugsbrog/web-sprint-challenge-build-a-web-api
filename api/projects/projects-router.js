@@ -25,11 +25,13 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-    try {
-
-    } catch (err) {
-        next(err)
-    }
+    const { name, description } = req.body
+        try {
+            const createProj = await Projects.insert({ name, description })
+            res.status(201).json(createProj)
+        } catch (err) {
+            next(err)
+        }
 })
 
 router.put('/:id', async (req, res, next) => {
