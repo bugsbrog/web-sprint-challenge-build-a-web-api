@@ -36,8 +36,10 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     const { id } = req.params
+    const { name, description, completed } = req.body
         try {
-
+            const updateProj = await Projects.update(id, { name, description, completed })
+            res.json(updateProj)
         } catch (err) {
             next(err)
         }
