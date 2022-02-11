@@ -1,11 +1,13 @@
 const express = require('express')
-
+const {
+    logger
+} = require('./projects-middleware')
 const Projects = require('./projects-model')
 const Actions = require('../actions/actions-model')
 
 const router = express.Router()
 
-router.get('/', async (req, res, next) => {
+router.get('/', logger, async (req, res, next) => {
     try {
         const getProj = await Projects.get()
         res.json(getProj)
@@ -14,7 +16,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', logger, async (req, res, next) => {
     const { id } = req.params
         try {
             const projId = await Projects.get(id)
@@ -24,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
         }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', logger, async (req, res, next) => {
     const { name, description } = req.body
         try {
             const createProj = await Projects.insert({ name, description })
@@ -34,7 +36,7 @@ router.post('/', async (req, res, next) => {
         }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', logger, async (req, res, next) => {
     const { id } = req.params
     const { name, description, completed } = req.body
         try {
@@ -45,7 +47,7 @@ router.put('/:id', async (req, res, next) => {
         }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', logger, async (req, res, next) => {
     const { id } = req.params
         try {
 
@@ -54,7 +56,7 @@ router.delete('/:id', async (req, res, next) => {
         }
 })
 
-router.get('/:id/actions', async (req, res, next) => {
+router.get('/:id/actions', logger, async (req, res, next) => {
     const { id } = req.params
         try {
 
