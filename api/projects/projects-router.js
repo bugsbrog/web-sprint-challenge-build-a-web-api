@@ -17,7 +17,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params
         try {
-
+            const projId = await Projects.get(id)
+            res.json(projId)
         } catch (err) {
             next(err)
         }
