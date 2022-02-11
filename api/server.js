@@ -1,9 +1,23 @@
 const express = require('express');
+const actionsRouter = require('./actions/actions-router')
+const projectsRouter = require('./projects/projects-router')
 const server = express();
 
-// Configure your server here
-// Build your actions router in /api/actions/actions-router.js
-// Build your projects router in /api/projects/projects-router.js
-// Do NOT `server.listen()` inside this file!
+server.use(express.json())
+
+server.use('/api/actions', actionsRouter)
+server.use('/api/projects', projectsRouter)
+
+server.use('*', (req, res) => {
+    res.send(`<h1>Hello there! Nice to meet you! 😁</h1>`)
+})
+
+server.use((err, req, res, next) => { // eslint-disable-line
+    console.log('You TOTALLY messed up!')
+    res.status(500).json({
+        message: err.message,
+        stack: err.stack
+    })
+})
 
 module.exports = server;
