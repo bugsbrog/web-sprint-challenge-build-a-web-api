@@ -45,7 +45,8 @@ router.put('/:id', validateActionId, validateActionBody, async (req, res, next) 
 router.delete('/:id', validateActionId, async (req, res, next) => {
     const { id } = req.params
         try {
-
+            const deletedAction = await Actions.remove(id)
+            res.json(deletedAction)
         } catch (err) {
             next(err)
         }
