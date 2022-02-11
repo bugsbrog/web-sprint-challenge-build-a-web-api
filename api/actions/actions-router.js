@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', validateActionId, async (req, res, next) => {
     const { id } = req.params
         try {
 
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
         }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', validateAction, async (req, res, next) => {
     try {
 
     } catch (err) {
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', validateActionId, validateActionBody, async (req, res, next) => {
     const { id } = req.params
         try {
 
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res, next) => {
         }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', validateActionId, async (req, res, next) => {
     const { id } = req.params
         try {
 
