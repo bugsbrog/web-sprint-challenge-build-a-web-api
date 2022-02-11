@@ -7,7 +7,7 @@ async function validateProjectId(req, res, next) {
                 if (!project) {
                     next({
                         status: 404,
-                        message: 'Project not found'
+                        message: 'ID of project not found'
                     })
                 } else {
                     req.project = project
